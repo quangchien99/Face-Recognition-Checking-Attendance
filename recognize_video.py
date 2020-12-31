@@ -108,12 +108,16 @@ while True:
 			# construct a blob for the face ROI, then pass the blob
 			# through our face embedding model to obtain the 128-d
 			# quantification of the face
+			# bắt buộc phải có bước này thì mới được phép đi qua CNN
 			faceBlob = cv2.dnn.blobFromImage(face, 1.0 / 255,
 				(96, 96), (0, 0, 0), swapRB=True, crop=False)
+			# cho đi qua embedđe CNN
 			embedder.setInput(faceBlob)
 			vec = embedder.forward()
 
 			# perform classification to recognize the face
+			#hay có trong classifier model -> trả về xác xuất range từ 0-1
+			#Có thể thay thế bằng predict nhưng nó không return ra array
 			preds = recognizer.predict_proba(vec)[0]
 			print("Preds: ", preds)
 			print("Argmax:",max(preds))

@@ -49,6 +49,7 @@ for (i, imagePath) in enumerate(imagePaths):
 	# extract the person name from the image path
 	print("[INFO] processing image {}/{}".format(i + 1,
 		len(imagePaths)))
+	#take the name of image file
 	name = imagePath.split(os.path.sep)[-2]
 
 	# load the image, resize it to have a width of 600 pixels (while
@@ -56,6 +57,7 @@ for (i, imagePath) in enumerate(imagePaths):
 	# dimensions
 	image = cv2.imread(imagePath)
 	image = imutils.resize(image, width=600)
+	#:2 hệ màu RBG
 	(h, w) = image.shape[:2]
 
 	# construct a blob from the image
